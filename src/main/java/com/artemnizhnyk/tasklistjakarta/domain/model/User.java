@@ -1,5 +1,6 @@
 package com.artemnizhnyk.tasklistjakarta.domain.model;
 
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
@@ -8,9 +9,15 @@ import java.util.List;
 @Setter
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "users")
+@Entity
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String username;
     private String password;
+    @OneToMany(mappedBy = "user")
     private List<Task> tasks;
 }

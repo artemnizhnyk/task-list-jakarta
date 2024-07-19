@@ -2,15 +2,14 @@ package com.artemnizhnyk.tasklistjakarta.web.dto;
 
 import com.artemnizhnyk.tasklistjakarta.domain.model.Task;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
 @AllArgsConstructor
 @Builder
+@Getter
+@Setter
 @Data
 public class UserDto {
 

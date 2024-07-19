@@ -1,6 +1,7 @@
 package com.artemnizhnyk.tasklistjakarta.web.rest.controller;
 
 import com.artemnizhnyk.tasklistjakarta.domain.model.Task;
+import com.artemnizhnyk.tasklistjakarta.domain.model.User;
 import com.artemnizhnyk.tasklistjakarta.service.UserService;
 import com.artemnizhnyk.tasklistjakarta.service.impl.UserServiceImpl;
 import com.artemnizhnyk.tasklistjakarta.web.dto.AnswerDto;
@@ -23,15 +24,18 @@ public class UserRestControllerV1 {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @GET
-    @Path("/api/v1/users/{id}")
+    @Path("/users/{id}")
     @Produces("application/json")
     public Response getUserById(@PathParam("id") final Long id) {
-        return Response.ok(UserDto.builder()
-                        .id(id)
-                        .username("any")
-                        .password("123")
-                        .tasks(List.of(new Task(228L)))
-                .build()
+        User userById = userService.getUserById(id);
+        UserDto userDto = UserDto.builder()
+                .id(userById.getId())
+                .username(userById.getUsername())
+                .password(userById.getPassword())
+                .tasks(new ArrayList<>())
+                .build();
+        return Response.ok(
+                userDto
         ).build();
     }
 
